@@ -1,4 +1,4 @@
-# CircuitPython SDK Virtual Machine
+ # CircuitPython SDK Virtual Machine (Combined)
 
 Vagrant file to build a virtual machine that can compile CircuitPython on the following microcontroller series:
 
