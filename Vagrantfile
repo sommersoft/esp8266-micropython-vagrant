@@ -44,12 +44,17 @@ Vagrant.configure(2) do |config|
   #config.vm.synced_folder "./source", "/home/vagrant/source", type: "nfs", create: true
   
   # Optionally share the /home/vagrant/source directory with SMB (only for Windows
-  # host machines, for Mac OSX or Linux try NFS above). ESP open SDK uses symbolic links
-  # which cannot be created with an SMB shared folder. Use the first shared folder command
-  # below run for the initial 'vagrant up', or anytime you need to use 'git submodule update'
-  # in the ESP open SDK folder.
-  #config.vm.synced_folder "./source", "/home/vagrant/source", create: true
-  config.vm.synced_folder "./source", "/home/vagrant/source", type: "smb", create: true
+  # host machines, for Mac OSX or Linux try NFS above). ESP open SDK & CircuitPython use
+  # symbolic links for the ESP8266 which cannot be created with an SMB shared folder.
+  config.vm.synced_folder "./source", "/home/vagrant/source", create: true
+  #config.vm.synced_folder "./source", "/home/vagrant/source", type: "smb", create: true
+  # If you need to use SMB shared folders you may have to create the following symbolic
+  # links manually (may include additional links not listed below):
+  #  circuitpython/lib/axtls/ssl/os_port.h -> os_port_micropython.h
+  #  circuitpython/ports/esp8266/modules/ds18x20.py -> ../../../drivers/onewire/ds18x20.py
+  #  circuitpython/ports/esp8266/modules/onewire.py -> ../../../drivers/onewire/onewire.py
+  #  circuitpython/ports/esp8266/modules/upip.py -> ../../../tools/upip.py
+  #  circuitpython/ports/esp8266/modules/upip_utarfile.py -> ../../../tools/upip_utarfile.py
 
   # Virtualbox VM configuration.
   config.vm.provider "virtualbox" do |v|
@@ -83,21 +88,16 @@ Vagrant.configure(2) do |config|
     wget https://dl.espressif.com/dl/xtensa-esp32-elf-linux64-1.22.0-61-gab8375a-5.2.0.tar.gz 2> /dev/null
     tar xvfz xtensa-esp32-elf-linux64-1.22.0-61-gab8375a-5.2.0.tar.gz
     
-    # Link xtensa path to .profile, if it isn't already linked
-    if ! grep -s 'PATH=/home/vagrant/xtensa-esp32-elf/bin:\$PATH' "$PROFILE"; then
-        echo "Editing $PROFILE to add xtensa path on Terminal launch"
-        echo "PATH=/home/vagrant/xtensa-esp32-elf/bin:\$PATH" >> ~/.profile
-    fi
-    #echo "PATH=/home/vagrant/xtensa-esp32-elf/bin:\$PATH" >> ~/.profile
+    # Link xtensa path to .profile
+    echo "PATH=/home/vagrant/xtensa-esp32-elf/bin:\$PATH" >> ~/.profile
     
     echo "Installing esp-open-sdk, Espressif ESP-IDF, and micropython source..."
     git clone --recursive https://github.com/pfalcon/esp-open-sdk.git
     git clone --recursive https://github.com/espressif/esp-idf.git
     
-    #echo "Finished provisioning, now run 'vagrant ssh' to enter the virtual machine."
     echo "Finished ESP8266 provisioning!"
 
-    echo "Installing ATMEL-SAMD toolchain..."
+    echo "Installing ATMEL-SAMD21 toolchain..."
     sudo add-apt-repository -y ppa:team-gcc-arm-embedded/ppa
 
     sudo apt-get update -qq
