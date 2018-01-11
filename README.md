@@ -1,4 +1,3 @@
-
 # CircuitPython SDK Virtual Machine (Combined)
 
 Vagrant file to build a virtual machine that can compile CircuitPython on the following microcontroller series:
@@ -7,6 +6,11 @@ Vagrant file to build a virtual machine that can compile CircuitPython on the fo
 * Espressif ESP8266
 
 # Dependencies
+
+Hardware requirements:
+
+*  CPU/OS necessary for the needed software
+*  ~8GB of available disk space
 
 You must have the following software installed:
 
@@ -34,5 +38,7 @@ Use the following guides to finish setting up the VMs for each microcontroller:
 
 # Mentions
 The Adafruit Vagrant setups were originally developed by Tony Dicola (@tdicola).
-Special Thanks! to @Dan Halbert and @jerryn on discord/#circuitpython for their help
-in troubleshooting the combination of the separate Vagrants into one toolchain.
+
+Special Thanks! to @tannewt, @Dan Halbert, and @jerryn on discord/#circuitpython
+for their help in troubleshooting the combination of the separate Vagrants into
+one toolchain.
