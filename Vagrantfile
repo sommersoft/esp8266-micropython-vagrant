@@ -9,7 +9,6 @@ Vagrant.configure(2) do |config|
   # The most common configuration options are documented and commented below.
   # For a complete reference, please see the online documentation at
   # https://docs.vagrantup.com.
-
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "ubuntu/trusty64"
@@ -39,23 +38,29 @@ Vagrant.configure(2) do |config|
   # argument is a set of non-required options.
   config.vm.synced_folder "./vagrant", "/vagrant", create: true
   
-  # Optionally share the /home/vagrant/source directory with NFS (only for Mac
-  # and Linux host machines, for Windows try SMB below).
+  ##---- Optionally share the /home/vagrant/source directory with your Host OS ---##
+  #
+  # For Mac and Linux host machines using NFS, uncomment the following line
   #config.vm.synced_folder "./source", "/home/vagrant/source", type: "nfs", create: true
-  
-  # Optionally share the /home/vagrant/source directory with SMB (only for Windows
-  # host machines, for Mac OSX or Linux try NFS above). ESP open SDK & CircuitPython use
-  # symbolic links for the ESP8266 which cannot be created with an SMB shared folder.
-  config.vm.synced_folder "./source", "/home/vagrant/source", create: true
-  #config.vm.synced_folder "./source", "/home/vagrant/source", type: "smb", create: true
-  # If you need to use SMB shared folders you may have to create the following symbolic
-  # links manually (may include additional links not listed below):
+  #
+  # For Windows host machines:
+  #   - ESP open SDK & CircuitPython use symbolic links for the ESP8266 which cannot
+  #     be created with a SMB shared folder.
+  #   - If you do not require the use of SMB, uncomment the "NON_SMB" line. You're done.
+  #   - If you do require SMB, uncomment the "NON_SMB" line whenever
+  #     provisioning (initial up, or to update the SDKs) or git updates run. Afterwards,
+  #     you can comment out the "NON_SMB" line, and uncomment the "SMB" line.
+  #NON_SMB#config.vm.synced_folder "./source", "/home/vagrant/source", create: true
+  #SMB#config.vm.synced_folder "./source", "/home/vagrant/source", type: "smb", create: true
+  # Below are the known symbolic links required, which can be manually created. This list may
+  # not be all-inclusive:
   #  circuitpython/lib/axtls/ssl/os_port.h -> os_port_micropython.h
   #  circuitpython/ports/esp8266/modules/ds18x20.py -> ../../../drivers/onewire/ds18x20.py
   #  circuitpython/ports/esp8266/modules/onewire.py -> ../../../drivers/onewire/onewire.py
   #  circuitpython/ports/esp8266/modules/upip.py -> ../../../tools/upip.py
   #  circuitpython/ports/esp8266/modules/upip_utarfile.py -> ../../../tools/upip_utarfile.py
-
+  ##------------------------------------------------------------------------------##
+  
   # Virtualbox VM configuration.
   config.vm.provider "virtualbox" do |v|
     # Bump the memory allocated to the VM up to 1 gigabyte as the compilation of
@@ -73,7 +78,7 @@ Vagrant.configure(2) do |config|
   end
 
   # Provision script to install dependencies used by the esp-open-sdk and
-  # micropython tools.  First install dependencies as root.
+  # circuitpython tools.  First install dependencies as root.
   config.vm.provision "shell", privileged: false, inline: <<-SHELL
     echo "Beginning VM provisioning..."
     echo "Installing esp-open-sdk, Espressif ESP-IDF, and micropython dependencies..."
@@ -91,7 +96,7 @@ Vagrant.configure(2) do |config|
     # Link xtensa path to .profile
     echo "PATH=/home/vagrant/xtensa-esp32-elf/bin:\$PATH" >> ~/.profile
     
-    echo "Installing esp-open-sdk, Espressif ESP-IDF, and micropython source..."
+    echo "Installing esp-open-sdk & Espressif ESP-IDF..."
     git clone --recursive https://github.com/pfalcon/esp-open-sdk.git
     git clone --recursive https://github.com/espressif/esp-idf.git
     
@@ -117,8 +122,8 @@ Vagrant.configure(2) do |config|
     echo "Cloning CircuitPython source..."
     mkdir -p ~/source
     cd ~/source
-    #git clone https://github.com/micropython/micropython.git
     git clone https://github.com/adafruit/circuitpython.git
+    #I'll leave this here incase anyone wants to use it.#git clone https://github.com/micropython/micropython.git
 
     cd circuitpython
     git submodule update --init --recursive
