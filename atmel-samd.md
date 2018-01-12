@@ -1,12 +1,12 @@
-## CircuitPython SDK - Building Atmel SAMD Firmware
+# CircuitPython SDK - Building Atmel SAMD Firmware
 
 Using the Vagrant-based virtual machine to build CircuitPython for Atmel SAMD-based boards.
 
-# Installation
+## Installation
 
 See the [SDK Installation guide](https://github.com/sommersoft/esp8266-micropython-vagrant/blob/combined/README.md).
 
-# Building Firmware
+## Building Firmware
 
 1.  After the VM is provisioned and up use the `vagrant ssh` command to enter
     the VM.  Once inside the VM the latest Atmel SAMD CircuitPython source will
