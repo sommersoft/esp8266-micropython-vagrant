@@ -17,16 +17,21 @@ You must have the following software installed:
 *  [VirtualBox](https://www.virtualbox.org/)
 *  [Vagrant](https://www.vagrantup.com/)
 
-## Usage
+## Installation & Usage
 
-Clone this repository and navigate to it in a command terminal, then run the
-following command to bring the Vagrant virtual machine up and provision it for
+Clone this repository and navigate to it in a command terminal. Before running
+the command to start installing, you will need to decide if you wish to share
+the CircuitPython folder with your Host OS. If so, you will need to uncomment the
+appropriate lines the `Vagrantfile` using a text editor.
+
+Run the following command to bring the Vagrant virtual machine up and provision it for
 compiling the tools:
 
     vagrant up
 
 The very first time this command is run it will take some time (~30 minutes) to
-download the operating system and setup the CircuitPython build toolchain.
+download the operating system and setup the CircuitPython build toolchain. (Known
+as _provisioning_ in Vagrant-speak)
 
 After the virtual machine is brought up and provisioned use the following
 command to enter an SSH session on it:
