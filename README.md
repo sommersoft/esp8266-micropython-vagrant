@@ -2,7 +2,7 @@
 
 Vagrant-based virtual machine that can compile CircuitPython on the following microcontroller series:
 
-* ATMEL SAMD21 & SAMD51
+* Atmel SAMD21 & SAMD51
 * Espressif ESP8266
 
 ## Dependencies
@@ -41,12 +41,15 @@ command to enter an SSH session on it:
 ## Finalize
 Use the following guides to finish setting up the VMs for each microcontroller:
 
-* [ATMEL SAMD](https://github.com/sommersoft/esp8266-micropython-vagrant/blob/combined/atmel-samd.md)
-* [ESP8266](https://github.com/sommersoft/esp8266-micropython-vagrant/blob/combined/esp8266.md)
+* For the Atmel SAMD, you are ready to compile firmware; no additional steps necessary:  
+  [Atmel SAMD](https://github.com/sommersoft/esp8266-micropython-vagrant/blob/combined/atmel-samd.md)  
+  
+* For the ESP8266, there are a few steps to accomplish before compiling firmware:  
+  [ESP8266](https://github.com/sommersoft/esp8266-micropython-vagrant/blob/combined/esp8266.md)
 
 ## Additional Resources
 
-* Adafruit Learn Guide for [Building Firmware on ATMEL SAMD21](https://learn.adafruit.com/micropython-for-samd21/build-firmware)
+* Adafruit Learn Guide for [Building Firmware on Atmel SAMD21](https://learn.adafruit.com/micropython-for-samd21/build-firmware)
 
 * Adafruit Learn Guide for [Building Firmware on ESP8266](https://learn.adafruit.com/building-and-running-micropython-on-the-esp8266/overview)
 
