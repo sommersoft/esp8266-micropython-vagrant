@@ -24,7 +24,7 @@ See the [SDK Installation guide](https://github.com/sommersoft/esp8266-micropyth
     
         sudo bossac -p ttyACM0 -U true -e -w -v -R /path/to/firmware.bin
     
-    Note the -e option will erase the chip's flash and any files on the MicroPython filesystem!
+    Note the -e option will erase the chip's flash and any files on the CircuitPython filesystem!
     
     Change the path to the firmware to the .bin file that was compiled.  These are typically
     located in the build- directory for each board like build-feather_bluefruit_m0_le/firmware.bin.
@@ -33,7 +33,7 @@ See the [SDK Installation guide](https://github.com/sommersoft/esp8266-micropyth
     inside the VM.  Any files in the `/vagrant` folder will be synchronized with
     the directory where the Vagrantfile is located on the host computer.
 
-    _Windows Note: if shared folders are used (default), these can also be accessed through
+    _Windows Note: if shared folders are used, these can also be accessed through
     File Explorer, command prompt, etc._
 
 4.  You can exit the VM at any time with the `exit` command.
