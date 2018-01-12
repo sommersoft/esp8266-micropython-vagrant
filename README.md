@@ -1,11 +1,11 @@
-## CircuitPython SDK Virtual Machine (Combined)
+# CircuitPython SDK Virtual Machine (Combined)
 
 Vagrant-based virtual machine that can compile CircuitPython on the following microcontroller series:
 
 * ATMEL SAMD21 & SAMD51
 * Espressif ESP8266
 
-# Dependencies
+## Dependencies
 
 Hardware requirements:
 
@@ -17,7 +17,7 @@ You must have the following software installed:
 *  [VirtualBox](https://www.virtualbox.org/)
 *  [Vagrant](https://www.vagrantup.com/)
 
-# Usage
+## Usage
 
 Clone this repository and navigate to it in a command terminal, then run the
 following command to bring the Vagrant virtual machine up and provision it for
@@ -33,13 +33,13 @@ command to enter an SSH session on it:
 
     vagrant ssh
 
-# Finalize
+## Finalize
 Use the following guides to finish setting up the VMs for each microcontroller:
 
 * [ATMEL SAMD](https://github.com/sommersoft/esp8266-micropython-vagrant/blob/combined/atmel-samd.md)
 * [ESP8266](https://github.com/sommersoft/esp8266-micropython-vagrant/blob/combined/esp8266.md)
 
-# Additional Resources
+## Additional Resources
 
 * Adafruit Learn Guide for [Building Firmware on ATMEL SAMD21](https://learn.adafruit.com/micropython-for-samd21/build-firmware)
 
@@ -50,7 +50,7 @@ Use the following guides to finish setting up the VMs for each microcontroller:
 
 * See more [details on Vagrant usage here](https://www.vagrantup.com/docs/getting-started/).
 
-# Mentions
+## Mentions
 The Adafruit Vagrant setups were originally developed by Tony Dicola (@tdicola).
 
 Special Thanks! to @tannewt, @Dan Halbert, and @jerryn on discord/#circuitpython
