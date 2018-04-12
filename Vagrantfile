@@ -56,22 +56,6 @@ Vagrant.configure(2) do |config|
   #  circuitpython/ports/esp8266/modules/upip.py -> ../../../tools/upip.py
   #  circuitpython/ports/esp8266/modules/upip_utarfile.py -> ../../../tools/upip_utarfile.py
 
-  # Virtualbox VM configuration.
-  config.vm.provider "virtualbox" do |v|
-    # Bump the memory allocated to the VM up to 1 gigabyte as the compilation of
-    # the esp-open-sdk tools requires more memory to complete.
-    v.memory = 1024
-    
-    # Allow symbolic links for Windows
-    v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/vagrant", "1"]
-    
-    # Enable USB.
-    v.customize ["modifyvm", :id, "--usb", "on"]
-    
-    # Add a USB passthrough for the SAMD21 bootloader VID & PID.
-    v.customize ["usbfilter", "add", "0", "--target", :id, "--name", "Adafruit M0 Bootloader", "--vendorid", "0x239a", "--productid", "0x000b"]
-  end
-
   # Provision script to install dependencies used by the esp-open-sdk and
   # micropython tools.  First install dependencies as root.
   config.vm.provision "shell", privileged: false, inline: <<-SHELL
@@ -125,5 +109,22 @@ Vagrant.configure(2) do |config|
 
     echo "Finished provisioning!  Use the 'vagrant ssh' command to enter VM.  CircuitPython source is in the /home/vagrant/source/circuitpython folder."
   SHELL
+
+  # Virtualbox VM configuration.
+  config.vm.provider "virtualbox" do |v|
+    # Bump the memory allocated to the VM up to 1 gigabyte as the compilation of
+    # the esp-open-sdk tools requires more memory to complete.
+    v.memory = 1024
+    
+    # Allow symbolic links for Windows
+    v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/vagrant", "1"]
+    
+    # Enable USB.
+    v.customize ["modifyvm", :id, "--usb", "on"]
+    
+    # Add a USB passthrough for the SAMD21 bootloader VID & PID.
+    v.customize ["usbfilter", "add", "0", "--target", :id, "--name", "Adafruit M0 Bootloader", "--vendorid", "0x239a", "--productid", "0x000b"]
+    
+  end
   
 end
